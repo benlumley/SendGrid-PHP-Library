@@ -229,7 +229,11 @@ class sendgridNewsletter extends sendgridConnect {
 		$originalContact = $this->newsletter_lists_email_get($list , $email);
 		
 		if(!$originalContact) return false; // if the current contact not exist nothing to edit
-		
+
+		// check if data is the same, if yes return 1
+		if($originalContact[0]==$data)
+			return 1;
+
 		$this->newsletter_lists_email_delete($list , $email); // deleteing the current contact
 
 		if(!$this->newsletter_lists_email_add($list , $data)){ // adding the new contact information
